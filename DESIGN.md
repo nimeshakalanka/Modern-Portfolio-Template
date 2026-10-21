@@ -24,10 +24,10 @@ One accent (indigo) on a zinc neutral scale. Both themes are designed to meet WC
 | `--bg` | `#FAFAFA` | `#09090B` | Page background |
 | `--surface` | `#FFFFFF` | `#18181B` | Cards, inputs |
 | `--surface-muted` | `#F4F4F5` | `#27272A` | Chips, timeline rail, placeholders |
-| `--fg` | `#09090B` | `#FAFAFA` | Primary text (19.9:1 / 19.1:1) |
-| `--fg-muted` | `#52525B` | `#A1A1AA` | Secondary text (7.7:1 / 7.8:1) |
+| `--fg` | `#09090B` | `#FAFAFA` | Primary text (19.1:1 on bg in both themes) |
+| `--fg-muted` | `#52525B` | `#A1A1AA` | Secondary text (7.4:1 / 7.8:1 on bg, ≥ 6.9:1 on surfaces) |
 | `--border` | `#E4E4E7` | `#27272A` | Hairlines |
-| `--accent` | `#4F46E5` | `#818CF8` | Links, active states, CTA (6.3:1 on bg / 6.6:1 on bg) |
+| `--accent` | `#4F46E5` | `#818CF8` | Links, active states, CTA (6.0:1 / 6.7:1 on bg; accent-fg on accent 6.3:1 / 6.7:1) |
 | `--accent-fg` | `#FFFFFF` | `#09090B` | Text on accent buttons |
 | `--accent-soft` | accent @ 12% | accent @ 16% | Tag backgrounds, focus glow |
 | `--danger` / `--success` | `#DC2626` / `#15803D` | `#F87171` / `#4ADE80` | Form feedback only, always paired with an icon and text |
