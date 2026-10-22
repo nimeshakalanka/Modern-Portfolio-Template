@@ -1,11 +1,18 @@
 import { PageTransition } from "@/components/layout/PageTransition";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
+import { Hero } from "@/components/sections/Hero";
+import { Intro } from "@/components/sections/Intro";
+import { SkillsHighlight } from "@/components/sections/SkillsHighlight";
 
 export default function HomePage() {
   return (
     <PageTransition>
-      <PageHeader eyebrow="Home" title="Shell check" lede="Temporary page while the layout is built." />
-      <div className="h-[150vh]" />
+      <Hero />
+      <Intro />
+      <FeaturedProjects />
+      <SkillsHighlight />
+      <CtaBand />
     </PageTransition>
   );
 }

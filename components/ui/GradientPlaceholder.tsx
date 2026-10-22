@@ -42,7 +42,7 @@ export function GradientPlaceholder({ seed, label, className }: GradientPlacehol
     >
       <div className="noise absolute inset-0 mix-blend-overlay" />
       <div className="absolute inset-0 grid place-items-center">
-        <span className="font-display text-[clamp(1.5rem,6cqi,3.5rem)] font-extrabold tracking-tight text-white/90 drop-shadow-sm">
+        <span className="font-display text-[clamp(1.5rem,6cqi,3.5rem)] font-extrabold tracking-tight text-white drop-shadow-sm">
           {label}
         </span>
       </div>
