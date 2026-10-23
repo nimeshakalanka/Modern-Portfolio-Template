@@ -37,11 +37,11 @@ export function Hero() {
 
           <div className="mt-10 animate-fade-up [animation-delay:260ms]">
             <GlassSurface shape="pill" className="inline-flex rounded-full">
-              <div className="flex flex-wrap gap-1.5 p-1.5">
-                <ButtonLink href="/projects" size="lg">
+              <div className="flex gap-1 p-1.5 sm:gap-1.5">
+                <ButtonLink href="/projects" className="sm:min-h-12 sm:px-6 sm:text-base">
                   View Projects <ArrowRight aria-hidden className="size-4" />
                 </ButtonLink>
-                <ButtonLink href="/contact" size="lg" variant="ghost">
+                <ButtonLink href="/contact" variant="ghost" className="sm:min-h-12 sm:px-6 sm:text-base">
                   Contact Me
                 </ButtonLink>
               </div>
@@ -62,7 +62,7 @@ export function Hero() {
 
       <a
         href="#intro"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full px-3 py-2 text-sm text-fg-muted transition-colors hover:text-accent sm:inline-flex"
+        className="absolute bottom-6 left-1/2 hidden min-h-11 -translate-x-1/2 items-center gap-2 rounded-full px-4 text-sm text-fg-muted transition-colors hover:text-accent sm:inline-flex"
       >
         <ArrowDown aria-hidden className="size-4 animate-bounce motion-reduce:animate-none" />
         Scroll to learn more

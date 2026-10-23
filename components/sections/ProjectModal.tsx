@@ -27,7 +27,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        exit={{ opacity: 0, transition: { duration: 0.18 } }}
         onClick={onClose}
       />
       <motion.div
@@ -38,7 +38,8 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         tabIndex={-1}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 40 }}
+        // A short tween on exit, so focus returns to the opener without waiting for a spring to settle.
+        exit={{ opacity: 0, y: 24, transition: { duration: 0.18, ease: "easeIn" } }}
         transition={{ type: "spring", stiffness: 380, damping: 34 }}
         className="relative max-h-[92dvh] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-t-[var(--radius-xl)] border border-line bg-surface shadow-float sm:rounded-[var(--radius-xl)]"
       >

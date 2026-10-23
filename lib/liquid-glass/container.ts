@@ -7,8 +7,8 @@
  * - `destroy()` removes the scroll listener, releases the WebGL context and the instance.
  * - `capture()` can run again to refresh the shared page snapshot (theme/route/resize changes).
  * - The snapshot canvas is uploaded directly as the texture (no toDataURL round trip).
- * - Glass elements are skipped via `[data-glass]`; `[data-reveal]` elements are forced visible
- *   in the snapshot so scroll-reveal animations do not leave holes in the refraction.
+ * - In the snapshot, `[data-glass]` surfaces are hidden (layout kept) and `[data-reveal]`
+ *   elements and CSS animations are forced to their final state, so the refraction matches the page.
  * - `onReady` callback, texture-size guard, no console logging, nested Button support removed.
  * The GLSL shaders are unchanged.
  */
@@ -385,8 +385,14 @@ export class Container {
       useCORS: true,
       backgroundColor: null,
       logging: false,
-      ignoreElements: (element) => element.hasAttribute("data-glass"),
       onclone: (doc) => {
+        // Hide glass surfaces without removing them: removal would reflow the page, so the
+        // snapshot would no longer line up with what is actually behind each surface.
+        // CSS animations would restart from their first keyframe in the clone, so disable them.
+        const style = doc.createElement("style");
+        style.textContent =
+          "[data-glass]{visibility:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important}";
+        doc.head.appendChild(style);
         doc.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
           el.style.opacity = "1";
           el.style.transform = "none";

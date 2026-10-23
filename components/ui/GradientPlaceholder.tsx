@@ -42,7 +42,13 @@ export function GradientPlaceholder({ seed, label, className }: GradientPlacehol
     >
       <div className="noise absolute inset-0 mix-blend-overlay" />
       <div className="absolute inset-0 grid place-items-center">
-        <span className="font-display text-[clamp(1.5rem,6cqi,3.5rem)] font-extrabold tracking-tight text-white drop-shadow-sm">
+        <span
+          className={cn(
+            "font-display font-extrabold tracking-tight text-white drop-shadow-sm",
+            // Initials fill the frame like a monogram; longer titles stay readable.
+            label.length <= 3 ? "text-[clamp(2.5rem,24cqi,8rem)]" : "text-[clamp(1.5rem,6cqi,3.5rem)]",
+          )}
+        >
           {label}
         </span>
       </div>

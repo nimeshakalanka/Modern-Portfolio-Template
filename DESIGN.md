@@ -63,13 +63,13 @@ Headings use `text-wrap: balance`; paragraphs use `text-wrap: pretty`.
 - **Elevation:** a hairline border plus one soft shadow `0 1px 2px rgb(0 0 0 / .04), 0 12px 32px -12px rgb(0 0 0 / .12)`. Cards lift 4px on hover.
 
 ## Components
-- **Layout:** `Navbar`, `MobileMenu`, `Footer`, `Background`, `SkipLink`, `ThemeToggle`
+- **Layout:** `Navbar` (with the mobile menu), `Footer`, `Background`, `PageTransition`. The skip link lives in the root layout.
 - **UI:**
   - Buttons and tags: `ButtonLink` / `Button` (primary · secondary · ghost), `Tag`
-  - Headings and layout: `SectionHeading` (eyebrow + title + lede), `Container`
-  - Motion: `Reveal`, `Stagger`
-  - Media and icons: `GradientPlaceholder`, `SocialIcon`
-- **Sections:** `Hero`, `Intro`, `FeaturedProjects`, `SkillsHighlight`, `Bio`, `EducationTimeline`, `SkillGroups`, `ProjectGrid` (filters + cards), `ProjectCard`, `ProjectModal`, `ContactForm`, `ContactAside`
+  - Headings: `PageHeader`, `SectionHeading` (eyebrow + title + lede); the page container is the `.container-page` class
+  - Motion: `Reveal`, `Stagger` / `StaggerItem`
+  - Media and icons: `GradientPlaceholder`, `SocialIcon`, `ThemeToggle`
+- **Sections:** `Hero`, `Intro`, `FeaturedProjects`, `SkillsHighlight`, `CtaBand`, `Bio`, `EducationTimeline`, `SkillGroups`, `ProjectGrid` (filters + cards), `ProjectCard`, `ProjectMedia`, `ProjectLinks`, `ProjectModal`, `ContactForm`, `ContactAside`
 - **Glass:** `GlassSurface`, `useLiquidGlass`
 
 ## Wireframes
@@ -118,11 +118,12 @@ Principle: motion explains structure and gives feedback. It never decorates for 
 
 | Where | What | Why |
 | --- | --- | --- |
-| Hero | Staggered fade-up of eyebrow → name → tagline → CTAs | First impression; establishes the reading order |
+| Hero + page headers | Staggered CSS fade-up of eyebrow → name → tagline → CTAs; the `h1` only rises (no fade) | First impression and reading order. CSS runs before hydration and never delays LCP |
 | Sections | `whileInView` fade-up once, `margin: -10%` | Signals new content without hiding it for long |
 | Lists (cards, chips, timeline) | Stagger children by 60ms | Guides the eye across the grid |
 | Nav | Shared `layoutId` pill under the active link | Shows where you are and where you went |
-| Buttons/cards | `whileHover` lift and `whileTap` scale 0.97 | Tactile feedback |
+| Cards | motion `whileHover` spring lift (4px) | Tactile feedback on the main interactive objects |
+| Buttons | CSS hover lift and `:active` scale 0.97 | Same feel with no JS on server-rendered buttons |
 | Project filter | `layout` + `AnimatePresence mode="popLayout"` | Cards visibly reflow instead of jumping |
 | Modal | Card image morphs into the modal (shared `layoutId`) | Keeps context between list and detail |
 | Routes | React `<ViewTransition>` crossfade + 12px rise, header anchored | Smooth page changes where supported; instant elsewhere |
