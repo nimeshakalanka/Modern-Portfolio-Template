@@ -4,10 +4,6 @@ import { ButtonLink } from "@/components/ui/Button";
 import { GradientPlaceholder } from "@/components/ui/GradientPlaceholder";
 import { profile } from "@/data/profile";
 
-/**
- * Above-the-fold intro. Entrance animations are CSS (see `animate-*` in globals.css) so they
- * start before hydration and never delay the largest contentful paint.
- */
 export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="relative">

@@ -3,10 +3,6 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-/**
- * Light/dark switch. Icons swap with the `dark` class (not JS state), so the server HTML
- * already matches the theme and nothing flickers or mismatches during hydration.
- */
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
 

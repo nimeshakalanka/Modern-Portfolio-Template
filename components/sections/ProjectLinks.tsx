@@ -3,10 +3,6 @@ import { ButtonLink } from "@/components/ui/Button";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import type { Project } from "@/data/projects";
 
-/**
- * Live + GitHub buttons. Each one renders only if the project has that URL.
- * Context is added as visually hidden text so the accessible name starts with the visible label.
- */
 export function ProjectLinks({ project }: { project: Project }) {
   return (
     <>

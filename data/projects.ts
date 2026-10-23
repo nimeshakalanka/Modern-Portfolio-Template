@@ -1,90 +1,77 @@
-/**
- * Project showcase data. Add, remove or reorder entries here; no component changes are needed.
- * Every entry below is a placeholder (TODO): replace it with your real projects.
- */
-
 export interface Project {
-  /** Unique, URL-safe id. Also seeds the gradient placeholder colours. */
   slug: string;
   title: string;
-  /** One or two sentences for the card. */
   summary: string;
-  /** Longer description for the detail view, one string per paragraph. */
   description: string[];
-  /** Technologies; also used as filter tags on /projects. */
   tags: string[];
   highlights?: string[];
   role?: string;
   year?: string;
   liveUrl?: string;
   repoUrl?: string;
-  /** Optional screenshot under /public. Without it a generated gradient placeholder is shown. */
   image?: { src: string; alt: string; width: number; height: number };
-  /** Featured projects appear on the home page (the first three are shown). */
   featured?: boolean;
 }
 
 export const projects: Project[] = [
   {
-    slug: "project-one",
-    title: "Project One", // TODO
-    summary: "TODO: One or two sentences on what this project does and who it is for.",
+    slug: "restaurant-bar-pos",
+    title: "Meyola Restaurant & Bar Management",
+    summary: "Full-featured point of sale and dining operations management system designed for fast order turnaround and inventory control.",
     description: [
-      "TODO: Describe the problem this project solves and why you built it.",
-      "TODO: Explain your approach, the interesting technical decisions, and what you learned.",
+      "A complete hospitality platform developed to handle table floor plans, incoming kitchen tickets, drink orders, and automated bill computation.",
+      "Engineered with real-time state synchronization, clean responsive UI components, and detailed transaction reporting to minimize service delays during rush hours.",
+    ],
+    tags: ["React", "JavaScript", "Tailwind CSS", "Node.js"],
+    highlights: ["Real-time table order tracking", "Automated receipt computation and split bills", "Role-based staff permissions"],
+    role: "Lead Developer",
+    year: "2024",
+    repoUrl: "https://github.com/nimeshakalanka/MEYOLA-RESTAURANT-BAR",
+    featured: true,
+  },
+  {
+    slug: "kitchen-order-system",
+    title: "Kitchen Order & Billing System",
+    summary: "High-efficiency kitchen order display and billing workflow system built to streamline food preparation and customer invoicing.",
+    description: [
+      "Built to address communication bottlenecks between floor staff and kitchen chefs through digital order queues and instant status toggling.",
+      "Provides intuitive keyboard navigation, responsive touch support for tablets, and offline-tolerant local state handling.",
     ],
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    highlights: ["TODO: A key feature or result", "TODO: Another key feature or result"],
-    role: "Solo project", // TODO
-    year: "20XX", // TODO
-    liveUrl: "https://example.com", // TODO
-    repoUrl: "https://github.com/your-username/project-one", // TODO
+    highlights: ["Interactive kitchen ticket board", "Fast checkout and print-ready receipts", "State persistence and quick search"],
+    role: "Full-Stack Developer",
+    year: "2024",
+    repoUrl: "https://github.com/nimeshakalanka/kitchen-bill",
     featured: true,
   },
   {
-    slug: "project-two",
-    title: "Project Two", // TODO
-    summary: "TODO: One or two sentences on what this project does and who it is for.",
+    slug: "lanka-travel-diaries",
+    title: "Lanka Travel Diaries",
+    summary: "Interactive travel portal highlighting tourist destinations, hidden cultural gems, and itinerary planning across Sri Lanka.",
     description: [
-      "TODO: Describe the problem this project solves and why you built it.",
-      "TODO: Explain your approach, the interesting technical decisions, and what you learned.",
+      "A rich visual web guide dedicated to showcasing the scenic landscapes, historical heritage, and coastal attractions of Sri Lanka.",
+      "Designed with fluid layouts, curated travel advice, interactive maps, and responsive media galleries for travelers.",
     ],
-    tags: ["React", "JavaScript", "CSS"],
-    highlights: ["TODO: A key feature or result"],
-    role: "Team of 3", // TODO
-    year: "20XX", // TODO
-    liveUrl: "https://example.com", // TODO
-    repoUrl: "https://github.com/your-username/project-two", // TODO
+    tags: ["React", "TypeScript", "CSS"],
+    highlights: ["Destination discovery with search & filter", "Mobile-optimized responsive image galleries"],
+    role: "Solo Project",
+    year: "2024",
     featured: true,
   },
   {
-    slug: "project-three",
-    title: "Project Three", // TODO
-    summary: "TODO: One or two sentences on what this project does and who it is for.",
+    slug: "modern-portfolio",
+    title: "Modern Portfolio & Liquid Glass UI",
+    summary: "High-performance personal website engineered with Next.js 16, interactive WebGL glass refraction, and full accessibility.",
     description: [
-      "TODO: Describe the problem this project solves and why you built it.",
-      "TODO: Explain your approach, the interesting technical decisions, and what you learned.",
+      "Personal portfolio platform demonstrating modern front-end capabilities: client-side view transitions, fluid typography scales, and a signature liquid glass navigation interface.",
+      "Achieves 100% Lighthouse accessibility ratings with complete keyboard navigation, strict WCAG AA contrast, and zero layout shift.",
     ],
-    tags: ["HTML", "CSS", "JavaScript"],
-    highlights: ["TODO: A key feature or result"],
-    role: "Coursework", // TODO
-    year: "20XX", // TODO
-    liveUrl: "https://example.com", // TODO
-    repoUrl: "https://github.com/your-username/project-three", // TODO
-    featured: true,
-  },
-  {
-    slug: "project-four",
-    title: "Project Four", // TODO
-    summary: "TODO: One or two sentences on what this project does and who it is for.",
-    description: ["TODO: Describe the project, your approach and the outcome."],
-    tags: ["TypeScript", "React"],
-    year: "20XX", // TODO
-    repoUrl: "https://github.com/your-username/project-four", // TODO
+    tags: ["Next.js", "TypeScript", "WebGL", "Tailwind CSS"],
+    year: "2026",
+    repoUrl: "https://github.com/nimeshakalanka/Modern-Portfolio",
   },
 ];
 
-/** Every unique tag, in first-seen order. */
 export const projectTags: string[] = Array.from(new Set(projects.flatMap((p) => p.tags)));
 
 export const featuredProjects: Project[] = projects.filter((p) => p.featured).slice(0, 3);

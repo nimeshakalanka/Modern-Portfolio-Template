@@ -4,21 +4,15 @@ import { m, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-
 const VIEWPORT = { once: true, margin: "0px 0px -10% 0px" } as const;
 
 interface RevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  /** Starting vertical offset in px. */
   y?: number;
 }
 
-/**
- * Fades content up once when it scrolls into view. `data-reveal` lets the liquid glass
- * snapshot (and the <noscript> rule in the layout) show the content in its final state.
- */
 export function Reveal({ children, className, delay = 0, y = 24 }: RevealProps) {
   return (
     <m.div
@@ -50,7 +44,6 @@ interface StaggerProps {
   as?: "div" | "ul" | "ol";
 }
 
-/** Reveals its <StaggerItem> children one after another when scrolled into view. */
 export function Stagger({ children, className, as = "div" }: StaggerProps) {
   const Component = as === "ul" ? m.ul : as === "ol" ? m.ol : m.div;
   return (

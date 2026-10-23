@@ -19,7 +19,6 @@ export interface GlassHandle {
 
 let recaptureTimer: ReturnType<typeof setTimeout> | undefined;
 
-/** Debounced refresh of the shared page snapshot, e.g. after a theme, route or size change. */
 export function requestRecapture(delay = 450): void {
   clearTimeout(recaptureTimer);
   recaptureTimer = setTimeout(() => Container.capture(), delay);
@@ -27,7 +26,6 @@ export function requestRecapture(delay = 450): void {
 
 const onWindowResize = () => requestRecapture(600);
 
-/** Mounts a liquid glass canvas filling `host` (which must be positioned). */
 export function createGlass(host: HTMLElement, options: GlassOptions): GlassHandle {
   const container = new Container({
     type: options.shape,

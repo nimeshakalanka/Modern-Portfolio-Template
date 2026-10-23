@@ -36,13 +36,11 @@ export function buttonClasses({ variant = "primary", size = "md", className }: S
 interface ButtonLinkProps extends StyleProps {
   href: Route | string;
   children: ReactNode;
-  /** Opens in a new tab with rel="noopener noreferrer". Implied for http(s) URLs. */
   external?: boolean;
   download?: boolean;
   "aria-label"?: string;
 }
 
-/** A link styled as a button. Internal routes use next/link; URLs and files use <a>. */
 export function ButtonLink({ href, children, external, download, variant, size, className, ...aria }: ButtonLinkProps) {
   const classes = buttonClasses({ variant, size, className });
   const isExternal = external ?? /^https?:\/\//.test(href);

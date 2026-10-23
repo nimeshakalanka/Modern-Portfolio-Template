@@ -31,10 +31,6 @@ function subscribe(onChange: () => void): () => void {
   return () => lists.forEach((list) => list.removeEventListener("change", onChange));
 }
 
-/**
- * Whether the WebGL liquid glass should run. False on the server, for reduced-motion users,
- * touch/small screens, Save-Data, missing WebGL, `?glass=off` or NEXT_PUBLIC_LIQUID_GLASS=off.
- */
 export function useLiquidGlass(): boolean {
   return useSyncExternalStore(subscribe, isEnabled, () => false);
 }

@@ -9,7 +9,6 @@ import { ProjectModal } from "./ProjectModal";
 
 const ALL = "All";
 
-/** Filterable project grid with a detail modal. `/projects#<slug>` opens a project directly. */
 export function ProjectGrid() {
   const [activeTag, setActiveTag] = useState(ALL);
   const [openSlug, setOpenSlug] = useState<string | null>(null);
@@ -17,7 +16,6 @@ export function ProjectGrid() {
   const visible = activeTag === ALL ? projects : projects.filter((p) => p.tags.includes(activeTag));
   const openProject = projects.find((p) => p.slug === openSlug) ?? null;
 
-  // Deep link: the hash is only readable in the browser, so sync it after mount.
   useEffect(() => {
     const syncFromHash = () => {
       const slug = decodeURIComponent(window.location.hash.slice(1));

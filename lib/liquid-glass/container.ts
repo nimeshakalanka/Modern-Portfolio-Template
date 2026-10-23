@@ -1,17 +1,5 @@
 /*
- * Liquid glass renderer, adapted from liquid-glass-js by Armagan Amcalar (MIT License).
- * Source: https://github.com/dashersw/liquid-glass-js (container.js). Licence text: ./LICENSE
- *
- * Changes from the original, to make it safe inside a React/Next.js app:
- * - ES module + TypeScript; html2canvas is injected (we use the oklch-aware `html2canvas-pro`).
- * - `destroy()` removes the scroll listener, releases the WebGL context and the instance.
- * - `capture()` can run again to refresh the shared page snapshot (theme/route/resize changes).
- * - The snapshot is captured at half resolution and uploaded directly as the texture
- *   (no toDataURL round trip).
- * - In the snapshot, `[data-glass]` surfaces are hidden (layout kept) and `[data-reveal]`
- *   elements and CSS animations are forced to their final state, so the refraction matches the page.
- * - `onReady` callback, texture-size guard, no console logging, nested Button support removed.
- * The GLSL shaders are unchanged.
+ * Liquid glass renderer (adapted from liquid-glass-js, MIT License).
  */
 import type html2canvasFn from "html2canvas-pro";
 
@@ -37,7 +25,6 @@ interface GlRefs {
   tintOpacityLoc: WebGLUniformLocation | null;
 }
 
-/** The library's default effect parameters (its `window.glassControls` fallbacks). */
 const PARAMS = {
   blurRadius: 5.0,
   edgeIntensity: 0.01,
@@ -50,10 +37,6 @@ const PARAMS = {
   rippleEffect: 0.1,
 };
 
-/**
- * The page snapshot is rendered at half resolution: it is heavily blurred anyway, and this
- * roughly halves the main-thread cost of the capture. Shader uniforms stay in CSS pixels.
- */
 const SNAPSHOT_SCALE = 0.5;
 
 const VERTEX_SHADER = `
@@ -377,7 +360,6 @@ export class Container {
     }
   }
 
-  /** Takes (or retakes) the shared page snapshot and feeds it to every live instance. */
   static capture(): void {
     const html2canvas = Container.html2canvas;
     if (!html2canvas || Container.instances.length === 0) return;
@@ -393,9 +375,6 @@ export class Container {
       backgroundColor: null,
       logging: false,
       onclone: (doc) => {
-        // Hide glass surfaces without removing them: removal would reflow the page, so the
-        // snapshot would no longer line up with what is actually behind each surface.
-        // CSS animations would restart from their first keyframe in the clone, so disable them.
         const style = doc.createElement("style");
         style.textContent =
           "[data-glass]{visibility:hidden!important}*,*::before,*::after{animation:none!important;transition:none!important}";
@@ -413,9 +392,7 @@ export class Container {
           else instance.setupShader(snapshot);
         }
       })
-      .catch(() => {
-        // The snapshot can fail (e.g. tainted cross-origin images); surfaces keep their CSS glass.
-      })
+      .catch(() => {})
       .finally(() => {
         Container.isCapturing = false;
         if (Container.captureQueued) {
@@ -427,7 +404,6 @@ export class Container {
 
   updateSizeFromDOM(): void {
     cancelAnimationFrame(this.sizeFrame);
-    // Wait for the next frame so DOM layout is complete.
     this.sizeFrame = requestAnimationFrame(() => {
       if (this.destroyed) return;
       const rect = this.element.getBoundingClientRect();
@@ -457,7 +433,6 @@ export class Container {
         gl.viewport(0, 0, newWidth, newHeight);
         gl.uniform2f(this.refs.resolutionLoc, newWidth, newHeight);
         gl.uniform1f(this.refs.borderRadiusLoc, this.borderRadius);
-        // Resizing a canvas clears it, so draw again straight away.
         this.render();
       }
     });
@@ -521,7 +496,6 @@ export class Container {
     if (!program) return;
     gl.useProgram(program);
 
-    // Geometry: two triangles covering the canvas.
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);

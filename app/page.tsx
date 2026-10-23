@@ -7,7 +7,6 @@ import { SkillsHighlight } from "@/components/sections/SkillsHighlight";
 import { profile } from "@/data/profile";
 import { siteUrl } from "@/lib/site";
 
-/** schema.org Person data so search engines understand who the site is about. */
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -25,7 +24,6 @@ export default function HomePage() {
     <PageTransition>
       <script
         type="application/ld+json"
-        // Escape "<" so profile text can never close the script tag.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
       />
       <Hero />

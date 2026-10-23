@@ -10,7 +10,6 @@ interface ProjectMediaProps {
   priority?: boolean;
 }
 
-/** The project screenshot, or generated artwork when there is none. Fixed 16:10 box: no layout shift. */
 export function ProjectMedia({ project, className, sizes, priority }: ProjectMediaProps) {
   return (
     <div className={cn("relative aspect-[16/10] overflow-hidden", className)}>

@@ -10,22 +10,15 @@ import { useLiquidGlass } from "./use-liquid-glass";
 interface GlassSurfaceProps {
   children: ReactNode;
   className?: string;
-  /** Must match the visual shape so the refraction follows the edges. */
   shape?: GlassShape;
-  /** Corner radius in px for `rounded`; ignored for `pill`/`circle`. */
   radius?: number;
 }
 
 const TINT = { light: 0.22, dark: 0.04 };
-
 const INTERACTION_EVENTS = ["pointermove", "pointerdown", "keydown", "wheel", "scroll"] as const;
 
 let hasInteracted = false;
 
-/**
- * Runs `callback` in idle time after the user first interacts with the page, so the
- * decorative glass never competes with loading and hydration. Returns a cancel function.
- */
 function afterFirstInteraction(callback: () => void): () => void {
   let idleId: number | undefined;
   const start = () => {
@@ -37,7 +30,7 @@ function afterFirstInteraction(callback: () => void): () => void {
         : Number(setTimeout(callback, 300));
   };
   const removeListeners = () => INTERACTION_EVENTS.forEach((type) => window.removeEventListener(type, start));
-  // Surfaces mounted after a client-side navigation start straight away.
+
   if (hasInteracted) start();
   else INTERACTION_EVENTS.forEach((type) => window.addEventListener(type, start, { once: true, passive: true }));
 
@@ -49,11 +42,6 @@ function afterFirstInteraction(callback: () => void): () => void {
   };
 }
 
-/**
- * A surface with CSS glassmorphism that upgrades to WebGL liquid glass where supported.
- * The CSS layer is always rendered, so the surface looks complete before, without, or
- * instead of the WebGL canvas. Children are real DOM content and sit above both layers.
- */
 export function GlassSurface({ children, className, shape = "rounded", radius = 24 }: GlassSurfaceProps) {
   const enabled = useLiquidGlass();
   const { resolvedTheme } = useTheme();
@@ -89,8 +77,6 @@ export function GlassSurface({ children, className, shape = "rounded", radius = 
     };
   }, [enabled, shape, radius]);
 
-  // The page snapshot behind the glass goes stale when the theme or route changes.
-  // Skipped until a surface exists, so the library is never loaded just to refresh nothing.
   useEffect(() => {
     if (!enabled || !glassRef.current) return;
     glassRef.current.setTintOpacity(isDark ? TINT.dark : TINT.light);

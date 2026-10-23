@@ -1,11 +1,7 @@
 @import "tailwindcss";
 
-/* next-themes toggles the `dark` class on <html>. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ---------- Design tokens (see DESIGN.md) ----------
-   Colours use hex/rgba (not oklch/color-mix) so the html2canvas snapshot used by the
-   liquid glass reproduces them exactly. */
 :root {
   color-scheme: light;
   --bg: #fafafa;
@@ -88,7 +84,6 @@
   --shadow-card: var(--shadow-card);
   --shadow-float: var(--shadow-float);
 
-  /* Fluid type scale, 360px → 1440px. */
   --text-display: clamp(2.75rem, 1.6rem + 5.2vw, 6rem);
   --text-display--line-height: 1;
   --text-display--letter-spacing: -0.035em;
@@ -101,8 +96,6 @@
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* CSS entrances for above-the-fold content: they run before hydration, so LCP is not delayed.
-     `rise` never touches opacity, so headings count as painted immediately. */
   --animate-rise: rise 800ms var(--ease-out-quint) both;
   --animate-fade-up: fade-up 700ms var(--ease-out-quint) both;
 
@@ -120,7 +113,6 @@
   }
 }
 
-/* ---------- Base ---------- */
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
@@ -180,7 +172,6 @@
   }
 }
 
-/* ---------- Components ---------- */
 @layer components {
   .container-page {
     width: 100%;
@@ -201,7 +192,6 @@
     color: var(--accent);
   }
 
-  /* CSS glass: the always-present base and fallback for the liquid glass surfaces. */
   .glass {
     background: var(--glass-tint);
     border: 1px solid var(--glass-border);
@@ -224,7 +214,6 @@
   }
 }
 
-/* ---------- Background mesh drift ---------- */
 @keyframes mesh-drift {
   0%,
   100% {
@@ -235,14 +224,12 @@
   }
 }
 
-/* Drift only on larger screens; on phones the static mesh saves battery and paint work. */
 @media (min-width: 768px) {
   .mesh-blob {
     animation: mesh-drift 24s ease-in-out infinite;
   }
 }
 
-/* ---------- Route transitions (React <ViewTransition>) ---------- */
 @keyframes vt-fade-out {
   to {
     opacity: 0;
@@ -256,7 +243,6 @@
   }
 }
 
-/* Only the page content animates; the shared chrome (nav, footer, background) stays put. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;

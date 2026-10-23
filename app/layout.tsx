@@ -50,11 +50,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    // next-themes sets the theme class before hydration, so the attribute differs from the server.
     <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
       <body>
         <noscript>
-          {/* Without JS, scroll-reveal content must still be visible. */}
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <a

@@ -1,7 +1,3 @@
-/**
- * Soft gradient mesh + film grain behind every page. Blobs are radial gradients rather than
- * blurred shapes, so they render identically in the liquid glass page snapshot.
- */
 export function Background() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">

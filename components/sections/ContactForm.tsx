@@ -64,7 +64,6 @@ export function ContactForm() {
 
   const messageLength = useWatch({ control, name: "message" })?.length ?? 0;
 
-  // Move focus to the result so keyboard and screen reader users land on it.
   useEffect(() => {
     if (status.state !== "idle") statusRef.current?.focus();
   }, [status]);
@@ -72,7 +71,6 @@ export function ContactForm() {
   const onSubmit = async ({ botcheck, ...values }: ContactValues) => {
     setStatus({ state: "idle" });
 
-    // A filled honeypot means a bot: pretend it worked and send nothing.
     if (botcheck) {
       reset();
       setStatus({ state: "success" });
@@ -175,7 +173,6 @@ export function ContactForm() {
           />
         </Field>
 
-        {/* Honeypot: off-screen and skipped by keyboard and screen readers. */}
         <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
           <label htmlFor={`${id}-botcheck`}>Leave this field empty</label>
           <input id={`${id}-botcheck`} type="text" tabIndex={-1} autoComplete="off" {...register("botcheck")} />

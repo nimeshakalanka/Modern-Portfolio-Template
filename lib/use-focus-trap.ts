@@ -5,10 +5,6 @@ import { useEffect, type RefObject } from "react";
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-/**
- * While mounted: keeps Tab focus inside `ref`, closes on Escape, locks page scroll,
- * and returns focus to the previously focused element on unmount.
- */
 export function useFocusTrap(ref: RefObject<HTMLElement | null>, onEscape: () => void): void {
   useEffect(() => {
     const node = ref.current;

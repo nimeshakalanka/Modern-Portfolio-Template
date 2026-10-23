@@ -1,6 +1,5 @@
 import { cn } from "@/lib/cn";
 
-/** Accent hue (indigo) used as the centre of the placeholder palette. */
 const ACCENT_HUE = 243;
 
 function hash(input: string): number {
@@ -10,17 +9,11 @@ function hash(input: string): number {
 }
 
 interface GradientPlaceholderProps {
-  /** Seeds the colours, so the same project always gets the same artwork. */
   seed: string;
-  /** Text drawn in the middle, e.g. initials or a project title. */
   label: string;
   className?: string;
 }
 
-/**
- * Abstract artwork used wherever there is no real image yet. Hues stay within ±35° of the
- * accent so placeholders look related but distinguishable. Decorative, so hidden from AT.
- */
 export function GradientPlaceholder({ seed, label, className }: GradientPlaceholderProps) {
   const h = hash(seed);
   const hueA = ACCENT_HUE + ((h % 71) - 35);
@@ -45,7 +38,6 @@ export function GradientPlaceholder({ seed, label, className }: GradientPlacehol
         <span
           className={cn(
             "font-display font-extrabold tracking-tight text-white drop-shadow-sm",
-            // Initials fill the frame like a monogram; longer titles stay readable.
             label.length <= 3 ? "text-[clamp(2.5rem,24cqi,8rem)]" : "text-[clamp(1.5rem,6cqi,3.5rem)]",
           )}
         >

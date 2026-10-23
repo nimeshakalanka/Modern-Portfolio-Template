@@ -5,7 +5,6 @@ export const alt = `${profile.name}, ${profile.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** Social share card, generated at build time from profile data. */
 export default function OpenGraphImage() {
   return new ImageResponse(
     (

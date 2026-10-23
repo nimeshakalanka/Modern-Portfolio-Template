@@ -6,10 +6,6 @@ interface PageHeaderProps {
   lede?: ReactNode;
 }
 
-/**
- * Top of an inner page. Animated with CSS (not JS) so the h1, usually the LCP element,
- * paints immediately and only its position eases in.
- */
 export function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
   return (
     <header className="container-page pt-32 pb-12 sm:pt-40 sm:pb-16">

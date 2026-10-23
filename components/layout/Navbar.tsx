@@ -19,7 +19,6 @@ function isActive(pathname: string, href: string): boolean {
 
 export function Navbar() {
   const pathname = usePathname();
-  // The menu belongs to the page it was opened on, so navigating closes it without an effect.
   const [menuPath, setMenuPath] = useState<string | null>(null);
   const open = menuPath === pathname;
   const navRef = useRef<HTMLElement>(null);

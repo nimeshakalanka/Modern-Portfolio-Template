@@ -14,7 +14,6 @@ export const contactSchema = z.object({
     .trim()
     .min(10, "Please write a message of at least 10 characters.")
     .max(MESSAGE_MAX, `Please keep your message under ${MESSAGE_MAX} characters.`),
-  /** Honeypot: hidden from people, so any value means a bot filled the form. */
   botcheck: z.string().optional(),
 });
 

@@ -10,7 +10,6 @@ import { ProjectMedia } from "./ProjectMedia";
 
 interface ProjectCardProps {
   project: Project;
-  /** Opens the detail modal. Without it, "Details" links to the project on /projects. */
   onOpen?: (project: Project) => void;
 }
 
