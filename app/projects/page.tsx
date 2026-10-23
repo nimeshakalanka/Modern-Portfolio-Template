@@ -20,7 +20,10 @@ export default function ProjectsPage() {
         title="Things I've built"
         lede="Filter by technology, or open a project for the full story, live demo and source code."
       />
-      <section aria-label="Project list" className="container-page pb-24 sm:pb-32">
+      <section aria-labelledby="all-projects" className="container-page pb-24 sm:pb-32">
+        <h2 id="all-projects" className="sr-only">
+          All projects
+        </h2>
         <ProjectGrid />
       </section>
     </PageTransition>

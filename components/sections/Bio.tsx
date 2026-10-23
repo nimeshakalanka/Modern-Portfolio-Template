@@ -2,14 +2,13 @@ import Image from "next/image";
 import { Download, Mail } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { GradientPlaceholder } from "@/components/ui/GradientPlaceholder";
-import { Reveal } from "@/components/ui/Reveal";
 import { profile } from "@/data/profile";
 
 export function Bio() {
   return (
     <section aria-labelledby="bio-title" className="pb-20 sm:pb-28">
       <div className="container-page grid items-start gap-12 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-20">
-        <Reveal className="mx-auto w-full max-w-sm md:sticky md:top-28">
+        <div className="mx-auto w-full max-w-sm animate-rise md:sticky md:top-28">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-xl)] border border-line shadow-float">
             {profile.photo ? (
               <Image
@@ -24,9 +23,9 @@ export function Bio() {
               <GradientPlaceholder seed={profile.name} label={profile.initials} className="size-full" />
             )}
           </div>
-        </Reveal>
+        </div>
 
-        <Reveal delay={0.1}>
+        <div className="animate-fade-up [animation-delay:120ms]">
           <h2 id="bio-title" className="text-h2 font-bold">
             My story
           </h2>
@@ -53,7 +52,7 @@ export function Bio() {
               <Mail aria-hidden className="size-4" /> Contact me
             </ButtonLink>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -197,7 +197,7 @@ export function ContactForm() {
       <div aria-live="polite" className="mt-6">
         <AnimatePresence mode="wait">
           {status.state !== "idle" && (
-            <motion.div
+            <m.div
               key={status.state}
               ref={statusRef}
               tabIndex={-1}
@@ -224,7 +224,7 @@ export function ContactForm() {
                   status.message
                 )}
               </p>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

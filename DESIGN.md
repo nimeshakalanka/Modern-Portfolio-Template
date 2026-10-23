@@ -128,6 +128,8 @@ Principle: motion explains structure and gives feedback. It never decorates for 
 | Modal | Card image morphs into the modal (shared `layoutId`) | Keeps context between list and detail |
 | Routes | React `<ViewTransition>` crossfade + 12px rise, header anchored | Smooth page changes where supported; instant elsewhere |
 
+**Loading:** Motion's animation features are loaded asynchronously through `LazyMotion` (`m` components, `lib/motion-features.ts`). Above-the-fold entrances use CSS, so nothing visible waits for that chunk.
+
 **Reduced motion:**
 - `MotionConfig reducedMotion="user"` turns transforms off and keeps opacity.
 - A CSS media query disables view transitions and the mesh drift.
@@ -148,7 +150,7 @@ A WebGL refraction + blur shader that samples an `html2canvas` snapshot of the p
   - the device has a fine pointer and is at least 768px wide
   - Save-Data is off
   - the URL has no `?glass=off` and `NEXT_PUBLIC_LIQUID_GLASS` isn't `off`.
-- **Loading:** the library and html2canvas are dynamically imported during idle time after load, so they stay out of the critical path.
+- **Loading:** the library and html2canvas are dynamically imported after the first user interaction, in idle time, so they stay out of the critical path. The snapshot is captured at half resolution, since it is blurred anyway.
 - **Snapshot refresh:** the snapshot is retaken after theme change, route change and resize.
 - **Accessibility:** the canvas is `aria-hidden` and `pointer-events: none`; text sits on top and keeps its contrast against the tint.
 

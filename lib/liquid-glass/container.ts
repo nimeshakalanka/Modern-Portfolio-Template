@@ -6,7 +6,8 @@
  * - ES module + TypeScript; html2canvas is injected (we use the oklch-aware `html2canvas-pro`).
  * - `destroy()` removes the scroll listener, releases the WebGL context and the instance.
  * - `capture()` can run again to refresh the shared page snapshot (theme/route/resize changes).
- * - The snapshot canvas is uploaded directly as the texture (no toDataURL round trip).
+ * - The snapshot is captured at half resolution and uploaded directly as the texture
+ *   (no toDataURL round trip).
  * - In the snapshot, `[data-glass]` surfaces are hidden (layout kept) and `[data-reveal]`
  *   elements and CSS animations are forced to their final state, so the refraction matches the page.
  * - `onReady` callback, texture-size guard, no console logging, nested Button support removed.
@@ -48,6 +49,12 @@ const PARAMS = {
   cornerBoost: 0.02,
   rippleEffect: 0.1,
 };
+
+/**
+ * The page snapshot is rendered at half resolution: it is heavily blurred anyway, and this
+ * roughly halves the main-thread cost of the capture. Shader uniforms stay in CSS pixels.
+ */
+const SNAPSHOT_SCALE = 0.5;
 
 const VERTEX_SHADER = `
     attribute vec2 a_position;
@@ -381,7 +388,7 @@ export class Container {
     Container.isCapturing = true;
 
     html2canvas(document.body, {
-      scale: 1,
+      scale: SNAPSHOT_SCALE,
       useCORS: true,
       backgroundColor: null,
       logging: false,
@@ -500,7 +507,7 @@ export class Container {
     const { gl } = refs;
     gl.bindTexture(gl.TEXTURE_2D, refs.texture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, snapshot);
-    gl.uniform2f(refs.textureSizeLoc, snapshot.width, snapshot.height);
+    gl.uniform2f(refs.textureSizeLoc, snapshot.width / SNAPSHOT_SCALE, snapshot.height / SNAPSHOT_SCALE);
     gl.uniform1f(refs.pageHeightLoc, document.documentElement.scrollHeight);
     gl.uniform1f(refs.viewportHeightLoc, window.innerHeight);
     this.render();
@@ -558,7 +565,7 @@ export class Container {
 
     gl.uniform1i(loc("u_image"), 0);
     gl.uniform2f(this.refs.resolutionLoc, this.canvas.width, this.canvas.height);
-    gl.uniform2f(this.refs.textureSizeLoc, snapshot.width, snapshot.height);
+    gl.uniform2f(this.refs.textureSizeLoc, snapshot.width / SNAPSHOT_SCALE, snapshot.height / SNAPSHOT_SCALE);
     gl.uniform1f(this.refs.borderRadiusLoc, this.borderRadius);
     gl.uniform1f(this.refs.tintOpacityLoc, this.tintOpacity);
     gl.uniform1f(this.refs.pageHeightLoc, document.documentElement.scrollHeight);

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { Tag } from "@/components/ui/Tag";
 import type { Project } from "@/data/projects";
@@ -19,14 +19,14 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
     "inline-flex min-h-11 items-center gap-1.5 rounded-full px-2 text-[0.9375rem] font-medium text-fg-muted transition-colors hover:text-accent";
 
   return (
-    <motion.article
+    <m.article
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 400, damping: 30 }}
       className="flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line bg-surface shadow-card transition-shadow hover:shadow-float"
     >
-      <motion.div layoutId={onOpen ? `project-media-${project.slug}` : undefined}>
+      <m.div layoutId={onOpen ? `project-media-${project.slug}` : undefined}>
         <ProjectMedia project={project} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
-      </motion.div>
+      </m.div>
 
       <div className="flex flex-1 flex-col p-6">
         <h3 className="text-xl font-bold">{project.title}</h3>
@@ -55,6 +55,6 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
           )}
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }

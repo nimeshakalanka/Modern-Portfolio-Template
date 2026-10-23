@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Check, X } from "lucide-react";
 import { useRef } from "react";
 import { Tag } from "@/components/ui/Tag";
@@ -22,7 +22,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   return (
     <div className="fixed inset-0 z-[70] flex items-end justify-center sm:items-center sm:p-6">
-      <motion.div
+      <m.div
         aria-hidden
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         initial={{ opacity: 0 }}
@@ -30,7 +30,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         exit={{ opacity: 0, transition: { duration: 0.18 } }}
         onClick={onClose}
       />
-      <motion.div
+      <m.div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
@@ -52,9 +52,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           <X aria-hidden className="size-5" />
         </button>
 
-        <motion.div layoutId={`project-media-${project.slug}`}>
+        <m.div layoutId={`project-media-${project.slug}`}>
           <ProjectMedia project={project} sizes="(min-width: 672px) 672px, 100vw" />
-        </motion.div>
+        </m.div>
 
         <div className="p-6 sm:p-8">
           {(project.year || project.role) && (
@@ -97,7 +97,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             <ProjectLinks project={project} />
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

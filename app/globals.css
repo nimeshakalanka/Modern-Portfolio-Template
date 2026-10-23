@@ -235,9 +235,11 @@
   }
 }
 
-.mesh-blob {
-  animation: mesh-drift 24s ease-in-out infinite;
-  will-change: transform;
+/* Drift only on larger screens; on phones the static mesh saves battery and paint work. */
+@media (min-width: 768px) {
+  .mesh-blob {
+    animation: mesh-drift 24s ease-in-out infinite;
+  }
 }
 
 /* ---------- Route transitions (React <ViewTransition>) ---------- */

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { GlassSurface } from "@/components/glass/GlassSurface";
@@ -73,7 +73,7 @@ export function Navbar() {
                       )}
                     >
                       {active && (
-                        <motion.span
+                        <m.span
                           layoutId="nav-indicator"
                           className="absolute inset-0 rounded-full bg-accent-soft"
                           transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -105,7 +105,7 @@ export function Navbar() {
 
         <AnimatePresence>
           {open && (
-            <motion.div
+            <m.div
               id={MENU_ID}
               initial={{ opacity: 0, y: -8, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -134,7 +134,7 @@ export function Navbar() {
                   );
                 })}
               </ul>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </nav>

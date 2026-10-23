@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { m, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -21,7 +21,7 @@ interface RevealProps {
  */
 export function Reveal({ children, className, delay = 0, y = 24 }: RevealProps) {
   return (
-    <motion.div
+    <m.div
       data-reveal
       className={className}
       initial={{ opacity: 0, y }}
@@ -30,7 +30,7 @@ export function Reveal({ children, className, delay = 0, y = 24 }: RevealProps) 
       transition={{ duration: 0.6, ease: EASE, delay }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -52,7 +52,7 @@ interface StaggerProps {
 
 /** Reveals its <StaggerItem> children one after another when scrolled into view. */
 export function Stagger({ children, className, as = "div" }: StaggerProps) {
-  const Component = as === "ul" ? motion.ul : as === "ol" ? motion.ol : motion.div;
+  const Component = as === "ul" ? m.ul : as === "ol" ? m.ol : m.div;
   return (
     <Component className={className} variants={container} initial="hidden" whileInView="show" viewport={VIEWPORT}>
       {children}
@@ -69,7 +69,7 @@ export function StaggerItem({
   className?: string;
   as?: "div" | "li";
 }) {
-  const Component = as === "li" ? motion.li : motion.div;
+  const Component = as === "li" ? m.li : m.div;
   return (
     <Component data-reveal className={className} variants={item}>
       {children}

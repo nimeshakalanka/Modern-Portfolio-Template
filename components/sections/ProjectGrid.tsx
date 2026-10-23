@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { AnimatePresence, LayoutGroup, m } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { projects, projectTags, type Project } from "@/data/projects";
 import { cn } from "@/lib/cn";
@@ -57,7 +57,7 @@ export function ProjectGrid() {
               )}
             >
               {active && (
-                <motion.span
+                <m.span
                   layoutId="filter-indicator"
                   className="absolute inset-0 rounded-full bg-accent"
                   transition={{ type: "spring", stiffness: 400, damping: 32 }}
@@ -74,10 +74,10 @@ export function ProjectGrid() {
         {activeTag !== ALL && ` built with ${activeTag}`}
       </p>
 
-      <motion.ul layout className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <m.ul layout className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout" initial={false}>
           {visible.map((project) => (
-            <motion.li
+            <m.li
               key={project.slug}
               id={project.slug}
               layout
@@ -87,10 +87,10 @@ export function ProjectGrid() {
               transition={{ type: "spring", stiffness: 350, damping: 32 }}
             >
               <ProjectCard project={project} onOpen={open} />
-            </motion.li>
+            </m.li>
           ))}
         </AnimatePresence>
-      </motion.ul>
+      </m.ul>
 
       <AnimatePresence>
         {openProject && <ProjectModal key={openProject.slug} project={openProject} onClose={close} />}
