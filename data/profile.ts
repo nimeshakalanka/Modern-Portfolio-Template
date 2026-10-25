@@ -49,7 +49,7 @@ export const profile: Profile = {
     "I work primarily with React, Next.js, TypeScript, and modern CSS tooling. I care deeply about performance, accessible design, fluid animations, and writing structured, maintainable code.",
   ],
   location: "Colombo, Sri Lanka",
-  email: "akalankanime11@gmail.com",
+  email: "akalankanime@gmail.com",
   availability: "Open to internships and freelance opportunities",
   responseTime: "Usually replies within 24-48 hours",
   cvPath: "/cv-placeholder.pdf",
@@ -74,8 +74,8 @@ export const profile: Profile = {
     {
       platform: "email",
       label: "Email",
-      href: "mailto:akalankanime11@gmail.com",
-      handle: "akalankanime11@gmail.com",
+      href: "mailto:akalankanime@gmail.com",
+      handle: "akalankanime@gmail.com",
     },
   ],
   education: [
